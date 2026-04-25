@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "561466249078",
+    "project_id": "lo2ta-b7577",
+    "storage_bucket": "lo2ta-b7577.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:561466249078:android:93043409a493982b87f457",
+        "android_client_info": {
+          "package_name": "com.lo2ta.lo2ta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "561466249078-rldvvobs2th04383pas3aea4r9q3mha9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lo2ta.lo2ta",
+            "certificate_hash": "fa60d83087f664461572f917df79b28e60d2d7ac"
+          }
+        },
+        {
+          "client_id": "561466249078-basbe7q4s80s15l67dv73s0o45onfa4c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaowRNm0pBCILK_jlvlRNPPbOkQAlPC20"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "561466249078-basbe7q4s80s15l67dv73s0o45onfa4c.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "561466249078-hcrkvir14qe94213uqjnrckm98oqt95a.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.lo2ta.lo2ta"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
