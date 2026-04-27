@@ -75,7 +75,7 @@ class _CategoriesWidgetState extends State<CategoriesWidget>
                 boxShadow: isSelected
                     ? [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.08),
+                          color: Colors.black.withValues(alpha: 0.08),
                           blurRadius: 12,
                           offset: const Offset(0, 4),
                         ),
@@ -89,7 +89,7 @@ class _CategoriesWidgetState extends State<CategoriesWidget>
                     width: 56,
                     height: 56,
                     decoration: BoxDecoration(
-                      color: cat.bgColor.withOpacity(0.15),
+                      color: cat.bgColor.withValues(alpha: 0.15),
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: Center(
