@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:ui';
 import 'package:lo2ta/core/theme/app_theme.dart';
-import 'package:lo2ta/features/user_module/home/presentation/pages/search_page.dart';
 import 'package:lo2ta/features/user_module/home/presentation/pages/profile_page.dart';
 import 'package:lo2ta/features/user_module/home/presentation/pages/home_page.dart';
 
@@ -27,9 +26,14 @@ const List<_NavItem> _navItems = [
     label: 'الرئيسية',
   ),
   _NavItem(
-    icon: Icons.search_rounded,
-    activeIcon: Icons.search_rounded,
-    label: 'بحث',
+    icon: Icons.local_offer,
+    activeIcon: Icons.local_offer,
+    label: 'عروض لقطة',
+  ),
+  _NavItem(
+    icon: Icons.store,
+    activeIcon: Icons.store,
+    label: 'متاجر',
   ),
   _NavItem(
     icon: Icons.person_outline_rounded,
@@ -52,7 +56,24 @@ class _UserMainWrapperState extends State<UserMainWrapper> {
 
   final List<Widget> _pages = [
     UserHomePage(),
-    const SearchPage(),
+    Container(
+      color: Colors.white,
+      child: Center(
+        child: Text(
+          'عروض لقطة',
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
+      ),
+    ),
+    Container(
+      color: Colors.white,
+      child: Center(
+        child: Text(
+          'متاجر',
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
+      ),
+    ),
     const ProfilePage(),
   ];
 
@@ -154,20 +175,20 @@ class _AppBottomNavbarState extends State<_AppBottomNavbar>
             padding: const EdgeInsets.fromLTRB(0, 12, 0, 0),
             // height: 68,
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.88),
+              color: Colors.white.withValues(alpha: 0.88),
               borderRadius: BorderRadius.circular(32),
               border: Border.all(
-                color: AppTheme.primaryColor.withOpacity(0.13),
+                color: AppTheme.primaryColor.withValues(alpha: 0.13),
                 width: 1.5,
               ),
               boxShadow: [
                 BoxShadow(
-                  color: AppTheme.primaryColor.withOpacity(0.13),
+                  color: AppTheme.primaryColor.withValues(alpha: 0.13),
                   blurRadius: 24,
                   offset: const Offset(0, 8),
                 ),
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.06),
+                  color: Colors.black.withValues(alpha: 0.06),
                   blurRadius: 12,
                   offset: const Offset(0, 4),
                 ),
@@ -237,7 +258,7 @@ class _NavButton extends StatelessWidget {
                         gradient: LinearGradient(
                           colors: [
                             AppTheme.primaryColor,
-                            AppTheme.primaryColor.withOpacity(0.75),
+                            AppTheme.primaryColor.withValues(alpha: 0.75),
                           ],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
@@ -245,7 +266,7 @@ class _NavButton extends StatelessWidget {
                         borderRadius: BorderRadius.circular(14),
                         boxShadow: [
                           BoxShadow(
-                            color: AppTheme.primaryColor.withOpacity(0.35),
+                            color: AppTheme.primaryColor.withValues(alpha: 0.35),
                             blurRadius: 10,
                             offset: const Offset(0, 4),
                           ),
