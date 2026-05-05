@@ -106,7 +106,7 @@ class OfferCardWidget extends StatelessWidget {
                           offer.title,
                           style: Theme.of(context).textTheme.bodyMedium
                               ?.copyWith(
-                            color: Colors.black.withValues(alpha: 0.85),
+                            color: offer.primaryColor,
                           ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,

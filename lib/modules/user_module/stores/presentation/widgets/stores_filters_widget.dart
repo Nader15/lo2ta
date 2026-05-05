@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:lo2ta/core/theme/app_theme.dart';
 
-class OffersFiltersWidget extends StatefulWidget {
+class StoresFiltersWidget extends StatefulWidget {
   final Function(String?) onFilterChanged;
   final Function(bool) onNearestToggled;
 
-  const OffersFiltersWidget({
+  const StoresFiltersWidget({
     super.key,
     required this.onFilterChanged,
     required this.onNearestToggled,
   });
 
   @override
-  State<OffersFiltersWidget> createState() => _OffersFiltersWidgetState();
+  State<StoresFiltersWidget> createState() => _StoresFiltersWidgetState();
 }
 
-class _OffersFiltersWidgetState extends State<OffersFiltersWidget> {
+class _StoresFiltersWidgetState extends State<StoresFiltersWidget> {
   String _selectedFilter = 'الكل';
 
   final List<Map<String, String>> _filters = [
@@ -31,7 +31,6 @@ class _OffersFiltersWidgetState extends State<OffersFiltersWidget> {
     {'label': 'ادوات مكتبية', 'emoji': '📚'},
     {'label': 'لحوم', 'emoji': '🥩'},
     {'label': 'دواجن', 'emoji': '🍗'},
-
   ];
 
   @override

@@ -110,11 +110,12 @@ class _LoginPageState extends State<LoginPage> {
                                 text: 'Login',
                                 isLoading: state is AuthLoading,
                                 onPressed: () {
-                                  if (_formKey.currentState!.validate())
+                                  if (_formKey.currentState!.validate()) {
                                     context.read<AuthCubit>().login(
                                       _emailController.text.trim(),
                                       _passwordController.text.trim(),
                                     );
+                                  }
                                 },
                               ),
                             ),

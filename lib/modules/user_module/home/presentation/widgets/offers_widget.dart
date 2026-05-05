@@ -79,21 +79,7 @@ class _HeroCardItem extends StatelessWidget {
           Positioned.fill(
             child: Image.network(offer.imageUrl, fit: BoxFit.fill),
           ),
-          Positioned.fill(
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.black.withValues(alpha: 0.05),
-                    Colors.black.withValues(alpha: 0.25),
-                    Colors.black.withValues(alpha: 0.65),
-                  ],
-                ),
-              ),
-            ),
-          ),
+
           Positioned(
             right: 20,
             bottom: -30,
@@ -119,7 +105,7 @@ class _HeroCardItem extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
-                color: Colors.black.withValues(alpha: 0.25),
+                color: Colors.black.withValues(alpha: 0.5),
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(
                   color: Colors.white.withValues(alpha: 0.15),

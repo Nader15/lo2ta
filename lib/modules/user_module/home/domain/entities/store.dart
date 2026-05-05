@@ -5,6 +5,7 @@ class Store extends Equatable {
   final String id;
   final String name;
   final String category;
+  final double? distance; // Distance in km
   final String deliveryTime;
   final String deliveryFee;
   final String rating;
@@ -18,6 +19,7 @@ class Store extends Equatable {
     required this.id,
     required this.name,
     required this.category,
+    this.distance,
     required this.deliveryTime,
     required this.deliveryFee,
     required this.rating,
@@ -33,6 +35,7 @@ class Store extends Equatable {
     id,
     name,
     category,
+    distance,
     deliveryTime,
     deliveryFee,
     rating,

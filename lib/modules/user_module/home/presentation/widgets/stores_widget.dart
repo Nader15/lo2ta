@@ -61,22 +61,68 @@ class StoresCardItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
-                child: Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [
-                        store.primaryColor,
-                        store.primaryColor.withValues(alpha: 0.7),
-                      ],
+                child: Stack(
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            store.primaryColor,
+                            store.primaryColor.withValues(alpha: 0.7),
+                          ],
+                        ),
+                        image: DecorationImage(
+                          image: NetworkImage(store.imageUrl),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
                     ),
-                    image: DecorationImage(
-                      image: NetworkImage(store.imageUrl),
-                      fit: BoxFit.fill,
-                    ),
-                  ),
+                    if (store.distance != null)
+                      Positioned(
+                        top: 8,
+                        right: 8,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 6, vertical: 4),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withValues(alpha: 0.1),
+                                blurRadius: 4,
+                                offset: const Offset(0, 2),
+                              ),
+                            ],
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                Icons.location_on_rounded,
+                                color: store.primaryColor,
+                                size: 10,
+                              ),
+                              const SizedBox(width: 2),
+                              Text(
+                                '${store.distance} كم',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .labelSmall
+                                    ?.copyWith(
+                                      fontSize: 9,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                  ],
                 ),
               ),
               Padding(

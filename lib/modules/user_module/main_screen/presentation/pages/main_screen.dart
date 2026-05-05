@@ -6,6 +6,7 @@ import 'package:lo2ta/modules/user_module/home/presentation/pages/home_page.dart
 import 'package:lo2ta/modules/user_module/profile/presentation/pages/profile_page.dart';
 
 import 'package:lo2ta/modules/user_module/offers/presentation/pages/offers_page.dart';
+import 'package:lo2ta/modules/user_module/stores/presentation/pages/stores_page.dart';
 
 // ─── Nav Item Model ──────────────────────────────────────────────────────────
 class _NavItem {
@@ -58,15 +59,7 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> _pages = [
     UserHomePage(),
     const OffersListPage(),
-    Container(
-      color: Colors.white,
-      child: Center(
-        child: Text(
-          'أماكن',
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-        ),
-      ),
-    ),
+    const StoresListPage(),
     const ProfilePage(),
   ];
 

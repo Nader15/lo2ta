@@ -83,7 +83,21 @@ class _InterestSelectionPageState extends State<InterestSelectionPage> {
             const SizedBox(height: 32),
             Expanded(child: Wrap(spacing: 12, runSpacing: 12, children: _interests.map((interest) {
               bool isSelected = _selected.contains(interest);
-              return FilterChip(label: Text(interest), selected: isSelected, onSelected: (val) => setState(() { if (val) _selected.add(interest); else _selected.remove(interest); }), selectedColor: AppTheme.primaryColor.withValues(alpha: 0.2), checkmarkColor: AppTheme.primaryColor, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)));
+              return FilterChip(
+                label: Text(interest),
+                selected: isSelected,
+                onSelected: (val) => setState(() {
+                  if (val) {
+                    _selected.add(interest);
+                  } else {
+                    _selected.remove(interest);
+                  }
+                }),
+                selectedColor: AppTheme.primaryColor.withValues(alpha: 0.2),
+                checkmarkColor: AppTheme.primaryColor,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12)),
+              );
             }).toList())),
             PremiumButton(text: 'FINISH', onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const LoginPage()))),
           ],

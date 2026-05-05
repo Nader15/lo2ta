@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lo2ta/core/widgets/app_background_widget.dart';
 import 'package:lo2ta/injection_container.dart';
-import 'package:lo2ta/modules/user_module/home/domain/entities/offer.dart';
+import 'package:lo2ta/modules/user_module/home/domain/entities/store.dart';
 import 'package:lo2ta/modules/user_module/home/presentation/cubits/home_cubit.dart';
 import 'package:lo2ta/modules/user_module/home/presentation/cubits/home_state.dart';
 import 'package:lo2ta/modules/user_module/home/presentation/widgets/section_title_widget.dart';
-import 'package:lo2ta/modules/user_module/offers/presentation/widgets/offer_card_widget.dart';
-import 'package:lo2ta/modules/user_module/offers/presentation/widgets/offers_filters_widget.dart';
+import 'package:lo2ta/modules/user_module/stores/presentation/widgets/store_card_widget.dart';
+import 'package:lo2ta/modules/user_module/stores/presentation/widgets/stores_filters_widget.dart';
 
-class OffersListPage extends StatefulWidget {
-  const OffersListPage({super.key});
+class StoresListPage extends StatefulWidget {
+  const StoresListPage({super.key});
 
   @override
-  State<OffersListPage> createState() => _OffersListPageState();
+  State<StoresListPage> createState() => _StoresListPageState();
 }
 
-class _OffersListPageState extends State<OffersListPage> {
+class _StoresListPageState extends State<StoresListPage> {
   String? _selectedCategory;
   bool _sortByNearest = false;
 
@@ -43,15 +43,18 @@ class _OffersListPageState extends State<OffersListPage> {
                     if (state is UserHomeLoading) {
                       return const Center(child: CircularProgressIndicator());
                     } else if (state is UserHomeLoaded) {
-                      List<Offer> filteredOffers = _selectedCategory == null
-                          ? List.from(state.offers)
-                          : state.offers
-                              .where((o) => o.category == _selectedCategory)
-                              .toList();
+                      List<Store> filteredStores = _selectedCategory == null
+                          ? List.from(state.stores)
+                          : state.stores
+                                .where((s) => s.category == _selectedCategory)
+                                .toList();
 
                       if (_sortByNearest) {
-                        filteredOffers.sort((a, b) => (a.distance ?? double.infinity)
-                            .compareTo(b.distance ?? double.infinity));
+                        filteredStores.sort(
+                          (a, b) => (a.distance ?? double.infinity).compareTo(
+                            b.distance ?? double.infinity,
+                          ),
+                        );
                       }
 
                       return Column(
@@ -59,17 +62,16 @@ class _OffersListPageState extends State<OffersListPage> {
                         children: [
                           const SizedBox(height: 16),
                           SectionTitle(
-                            title: 'اكتشف أقوى عروض لقطة',
-                            badge: '💎 عروض حصرية',
+                            title: 'أماكن فيها عروض لقطة',
+                            badge: '⭐ أشهر الأماكن',
                             highlightWord: 'لقطة',
                           ),
                           const SizedBox(height: 16),
-                          OffersFiltersWidget(
+                          StoresFiltersWidget(
                             onFilterChanged: (category) {
                               setState(() {
                                 _selectedCategory = category;
-                                _sortByNearest = false; // Reset sorting if category changes? Or keep it? 
-                                // User usually expects category first.
+                                _sortByNearest = false;
                               });
                             },
                             onNearestToggled: (isNearest) {
@@ -79,28 +81,32 @@ class _OffersListPageState extends State<OffersListPage> {
                               });
                             },
                           ),
-                          const SizedBox(height: 10),
+                          const SizedBox(height: 16),
                           Expanded(
-                            child: filteredOffers.isEmpty
+                            child: filteredStores.isEmpty
                                 ? const Center(
-                                    child: Text(
-                                      'لا يوجد عروض في هذا القسم حالياً',
-                                      style: TextStyle(
-                                        color: Colors.black54,
-                                        fontWeight: FontWeight.w500,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(top: 100),
+                                      child: Text(
+                                        'لا توجد متاجر في هذا القسم حالياً',
+                                        style: TextStyle(
+                                          color: Colors.black54,
+                                          fontWeight: FontWeight.w500,
+                                        ),
                                       ),
                                     ),
                                   )
                                 : ListView.builder(
                                     physics: const BouncingScrollPhysics(),
-                                    itemCount: filteredOffers.length,
+                                    itemCount: filteredStores.length,
                                     itemBuilder: (context, index) {
-                                      return OfferCardWidget(
-                                        offer: filteredOffers[index],
+                                      return StoreCardWidget(
+                                        store: filteredStores[index],
                                       );
                                     },
                                   ),
                           ),
+
                         ],
                       );
                     } else if (state is UserHomeError) {
