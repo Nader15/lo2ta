@@ -5,6 +5,8 @@ class Offer extends Equatable {
   final String id;
   final String title;
   final String subtitle;
+  final String? category;
+  final double? distance; // Distance in km
   final String discount;
   final String emoji;
   final Color primaryColor;
@@ -19,6 +21,8 @@ class Offer extends Equatable {
     required this.id,
     required this.title,
     required this.subtitle,
+    this.category,
+    this.distance,
     required this.discount,
     required this.emoji,
     required this.primaryColor,
@@ -35,6 +39,8 @@ class Offer extends Equatable {
         id,
         title,
         subtitle,
+        category,
+        distance,
         discount,
         emoji,
         primaryColor,

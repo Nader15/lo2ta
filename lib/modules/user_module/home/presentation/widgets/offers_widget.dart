@@ -165,14 +165,14 @@ class _HeroCardItem extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        'EGP ${offer.discountedPrice.toInt()}',
+                        '${offer.discountedPrice.toInt()} جنية ',
                         style: Theme.of(
                           context,
                         ).textTheme.labelLarge?.copyWith(color: Colors.white),
                       ),
                       const SizedBox(width: 10),
                       Text(
-                        'EGP ${offer.originalPrice.toInt()}',
+                        '${offer.originalPrice.toInt()} جنية ',
                         style: Theme.of(context).textTheme.bodySmall
                             ?.copyWith(
                               color: Colors.white.withValues(alpha: 0.6),
