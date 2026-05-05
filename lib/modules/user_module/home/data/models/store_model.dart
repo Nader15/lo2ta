@@ -11,6 +11,9 @@ class StoreModel extends Store {
     required super.rating,
     required super.emoji,
     required super.primaryColor,
+    required super.imageUrl,
+    required super.logoUrl,
+    required super.offersCount,
   });
 
   factory StoreModel.fromJson(Map<String, dynamic> json) {
@@ -23,6 +26,9 @@ class StoreModel extends Store {
       rating: json['rating'],
       emoji: json['emoji'],
       primaryColor: Color(json['primaryColor']),
+      imageUrl: json['imageUrl'],
+      logoUrl: json['logoUrl'],
+      offersCount: json['offersCount'],
     );
   }
 
@@ -36,6 +42,9 @@ class StoreModel extends Store {
       'rating': rating,
       'emoji': emoji,
       'primaryColor': primaryColor.value,
+      'imageUrl': imageUrl,
+      'logoUrl': logoUrl,
+      'offersCount': offersCount,
     };
   }
 }

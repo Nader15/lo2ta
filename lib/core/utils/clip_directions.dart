@@ -1,0 +1,1 @@
+enum ClipDirection { left, right }

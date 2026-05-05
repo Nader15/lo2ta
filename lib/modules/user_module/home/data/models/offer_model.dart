@@ -12,6 +12,7 @@ class OfferModel extends Offer {
     required super.bgStart,
     required super.bgEnd,
     required super.imageUrl,
+    required super.logoUrl,
     required super.originalPrice,
     required super.discountedPrice,
   });
@@ -27,6 +28,7 @@ class OfferModel extends Offer {
       bgStart: Color(json['bgStart']),
       bgEnd: Color(json['bgEnd']),
       imageUrl: json['imageUrl'],
+      logoUrl: json['logoUrl'],
       originalPrice: (json['originalPrice'] as num).toDouble(),
       discountedPrice: (json['discountedPrice'] as num).toDouble(),
     );
@@ -43,6 +45,7 @@ class OfferModel extends Offer {
       'bgStart': bgStart.value,
       'bgEnd': bgEnd.value,
       'imageUrl': imageUrl,
+      'logoUrl': logoUrl,
       'originalPrice': originalPrice,
       'discountedPrice': discountedPrice,
     };

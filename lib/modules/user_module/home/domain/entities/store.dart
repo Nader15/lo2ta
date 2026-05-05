@@ -10,6 +10,9 @@ class Store extends Equatable {
   final String rating;
   final String emoji;
   final Color primaryColor;
+  final String imageUrl;
+  final String logoUrl;
+  final String offersCount;
 
   const Store({
     required this.id,
@@ -20,17 +23,23 @@ class Store extends Equatable {
     required this.rating,
     required this.emoji,
     required this.primaryColor,
+    required this.imageUrl,
+    required this.logoUrl,
+    required this.offersCount,
   });
 
   @override
   List<Object?> get props => [
-        id,
-        name,
-        category,
-        deliveryTime,
-        deliveryFee,
-        rating,
-        emoji,
-        primaryColor,
-      ];
+    id,
+    name,
+    category,
+    deliveryTime,
+    deliveryFee,
+    rating,
+    emoji,
+    primaryColor,
+    imageUrl,
+    logoUrl,
+    offersCount,
+  ];
 }

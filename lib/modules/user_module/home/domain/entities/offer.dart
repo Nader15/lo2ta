@@ -11,6 +11,7 @@ class Offer extends Equatable {
   final Color bgStart;
   final Color bgEnd;
   final String imageUrl;
+  final String logoUrl;
   final double originalPrice;
   final double discountedPrice;
 
@@ -24,6 +25,7 @@ class Offer extends Equatable {
     required this.bgStart,
     required this.bgEnd,
     required this.imageUrl,
+    required this.logoUrl,
     required this.originalPrice,
     required this.discountedPrice,
   });
@@ -39,6 +41,7 @@ class Offer extends Equatable {
         bgStart,
         bgEnd,
         imageUrl,
+        logoUrl,
         originalPrice,
         discountedPrice,
       ];

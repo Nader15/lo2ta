@@ -33,7 +33,7 @@ const List<_NavItem> _navItems = [
   _NavItem(
     icon: Icons.store,
     activeIcon: Icons.store,
-    label: 'متاجر',
+    label: 'أماكن',
   ),
   _NavItem(
     icon: Icons.person_outline_rounded,
@@ -69,7 +69,7 @@ class _MainScreenState extends State<MainScreen> {
       color: Colors.white,
       child: Center(
         child: Text(
-          'متاجر',
+          'أماكن',
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
       ),
