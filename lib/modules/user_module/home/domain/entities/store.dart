@@ -14,6 +14,9 @@ class Store extends Equatable {
   final String imageUrl;
   final String logoUrl;
   final String offersCount;
+  final String address;
+  final double latitude;
+  final double longitude;
 
   const Store({
     required this.id,
@@ -28,6 +31,9 @@ class Store extends Equatable {
     required this.imageUrl,
     required this.logoUrl,
     required this.offersCount,
+    required this.address,
+    required this.latitude,
+    required this.longitude,
   });
 
   @override
@@ -44,5 +50,8 @@ class Store extends Equatable {
     imageUrl,
     logoUrl,
     offersCount,
+    address,
+    latitude,
+    longitude,
   ];
 }

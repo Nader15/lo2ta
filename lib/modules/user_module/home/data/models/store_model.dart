@@ -15,6 +15,9 @@ class StoreModel extends Store {
     required super.imageUrl,
     required super.logoUrl,
     required super.offersCount,
+    required super.address,
+    required super.latitude,
+    required super.longitude,
   });
 
   factory StoreModel.fromJson(Map<String, dynamic> json) {
@@ -31,6 +34,9 @@ class StoreModel extends Store {
       imageUrl: json['imageUrl'],
       logoUrl: json['logoUrl'],
       offersCount: json['offersCount'],
+      address: json['address'] ?? '',
+      latitude: (json['latitude'] as num?)?.toDouble() ?? 0.0,
+      longitude: (json['longitude'] as num?)?.toDouble() ?? 0.0,
     );
   }
 
@@ -48,6 +54,9 @@ class StoreModel extends Store {
       'imageUrl': imageUrl,
       'logoUrl': logoUrl,
       'offersCount': offersCount,
+      'address': address,
+      'latitude': latitude,
+      'longitude': longitude,
     };
   }
 }
