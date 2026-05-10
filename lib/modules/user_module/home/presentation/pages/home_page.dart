@@ -55,7 +55,10 @@ class UserHomePage extends StatelessWidget {
                               onTap: () {},
                             ),
                             const SizedBox(height: 16),
-                            StoresWidget(stores: state.stores),
+                            StoresWidget(
+                              stores: state.stores,
+                              offers: state.offers,
+                            ),
                             const SizedBox(height: 32),
                           ],
                         ),

@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:lo2ta/modules/user_module/home/domain/entities/offer.dart';
 import 'package:lo2ta/modules/user_module/home/domain/entities/store.dart';
+import 'package:lo2ta/modules/user_module/stores/presentation/pages/store_details_page.dart';
 
 class StoreCardWidget extends StatelessWidget {
   final Store store;
-  const StoreCardWidget({super.key, required this.store});
+  final List<Offer> storeOffers;
+
+  const StoreCardWidget({
+    super.key,
+    required this.store,
+    required this.storeOffers,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +21,15 @@ class StoreCardWidget extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(30),
         child: GestureDetector(
-          onTap: () {},
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => StoreDetailsPage(
+                store: store,
+                storeOffers: storeOffers,
+              ),
+            ),
+          ),
           child: Container(
             decoration: BoxDecoration(
               color: Colors.white,
@@ -85,79 +101,94 @@ class StoreCardWidget extends StatelessWidget {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
+
+                      /// LEFT SIDE
                       Expanded(
                         child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
+
+                            /// STORE LOGO
                             CircleAvatar(
-                              radius: 30,
-                              backgroundColor: store.primaryColor.withValues(alpha: 0.1),
+                              radius: 25,
+                              backgroundColor:
+                              store.primaryColor.withValues(alpha: 0.1),
                               backgroundImage: NetworkImage(store.logoUrl),
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  store.name,
-                                  textAlign: TextAlign.start,
-                                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    color: const Color(0xFF1A1A1A),
+
+                            const SizedBox(width: 5),
+
+                            /// STORE INFO
+                            Expanded(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+
+                                  /// STORE NAME
+                                  Text(
+                                    store.name,
+                                    textAlign: TextAlign.start,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge
+                                        ?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      color: const Color(0xFF1A1A1A),
+                                    ),
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                const SizedBox(height: 8),
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 8,
-                                    vertical: 4,
-                                  ),
-                                  // decoration: BoxDecoration(
-                                  //   color: store.primaryColor.withValues(alpha: 0.1),
-                                  //   borderRadius: BorderRadius.circular(24),
-                                  // ),
-                                  child: Text(
+
+                                  const SizedBox(height: 8),
+
+                                  /// CATEGORY
+                                  Text(
                                     store.category,
                                     overflow: TextOverflow.ellipsis,
-                                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                                    maxLines: 1,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .labelSmall
+                                        ?.copyWith(
                                       fontWeight: FontWeight.w600,
                                       color: store.primaryColor,
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ],
                         ),
                       ),
+
+                      const SizedBox(width: 12),
+
+                      /// OFFERS BOX
                       Container(
                         padding: const EdgeInsets.symmetric(
-                          horizontal: 8,
-                          vertical: 4,
+                          horizontal: 10,
+                          vertical: 8,
                         ),
                         decoration: BoxDecoration(
                           color: store.primaryColor.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(16),
                         ),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              "عندة\n ${store.offersCount} عرض\n لقطة ",
-                              textAlign: TextAlign.center,
-                              style: Theme.of(context).textTheme.labelSmall
-                                  ?.copyWith(
-                                fontWeight: FontWeight.bold,
-                                color: const Color(0xFF333333),
-                              ),
-                            ),
-                            const SizedBox(height: 2),
-                          ],
+                        child: Text(
+                          "عندة\n${store.offersCount} عرض\nلقطة",
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context)
+                              .textTheme
+                              .labelSmall
+                              ?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: const Color(0xFF333333),
+                          ),
                         ),
-                      )
+                      ),
                     ],
                   ),
-                ),
+                )
               ],
             ),
           ),

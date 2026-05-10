@@ -1,8 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lo2ta/core/theme/app_theme.dart';
 import 'package:lo2ta/modules/user_module/home/domain/entities/offer.dart';
+import 'package:lo2ta/modules/user_module/home/presentation/cubits/home_cubit.dart';
+import 'package:lo2ta/modules/user_module/home/presentation/cubits/home_state.dart';
+import 'package:lo2ta/modules/user_module/stores/presentation/pages/store_details_page.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -75,6 +79,10 @@ class _OfferDetailsPageState extends State<OfferDetailsPage> {
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.pop(context),
         ),
+      ),
+      title: Text(
+        widget.offer.store?.name ?? 'تفاصيل العرض',
+        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold,color: Colors.white,),
       ),
       flexibleSpace: FlexibleSpaceBar(
         background: Stack(
@@ -240,74 +248,103 @@ class _OfferDetailsPageState extends State<OfferDetailsPage> {
 
   Widget _buildStoreSection() {
     if (widget.offer.store == null) return const SizedBox();
-    
-    return Container(
-      margin: const EdgeInsets.all(20),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 5),
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: CachedNetworkImage(
-                  imageUrl: widget.offer.store!.logoUrl,
-                  width: 50,
-                  height: 50,
-                  fit: BoxFit.cover,
+
+    return BlocBuilder<HomeCubit, HomeState>(
+      builder: (context, state) {
+        return GestureDetector(
+          onTap: () {
+            List<Offer> storeOffers = [];
+            if (state is UserHomeLoaded) {
+              storeOffers = state.offers
+                  .where((o) => o.store?.id == widget.offer.store!.id)
+                  .toList();
+            }
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (childContext) => BlocProvider.value(
+                  value: context.read<HomeCubit>(),
+                  child: StoreDetailsPage(
+                    store: widget.offer.store!,
+                    storeOffers: storeOffers,
+                  ),
                 ),
               ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+            );
+          },
+          child: Container(
+            margin: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.05),
+                  blurRadius: 10,
+                  offset: const Offset(0, 5),
+                ),
+              ],
+            ),
+            child: Column(
+              children: [
+                Row(
                   children: [
-                    Text(
-                      widget.offer.store!.name,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: CachedNetworkImage(
+                        imageUrl: widget.offer.store!.logoUrl,
+                        width: 50,
+                        height: 50,
+                        fit: BoxFit.cover,
                       ),
                     ),
-                    Text(
-                      widget.offer.store!.address,
-                      style: TextStyle(color: Colors.grey[600], fontSize: 13),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.offer.store!.name,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                          Text(
+                            widget.offer.store!.address,
+                            style: TextStyle(
+                                color: Colors.grey[600], fontSize: 13),
+                          ),
+                        ],
+                      ),
                     ),
+                    Icon(Icons.arrow_forward_ios,
+                        size: 16, color: Colors.grey[400]),
                   ],
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 20),
-          ElevatedButton.icon(
-            onPressed: _openMap,
-            icon: const Icon(Icons.directions_outlined),
-            label: const Text('الذهاب للمتجر'),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.white,
-              foregroundColor: AppTheme.primaryColor,
-              elevation: 0,
-              side: const BorderSide(color: AppTheme.primaryColor),
-              minimumSize: const Size(double.infinity, 50),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
+                const SizedBox(height: 20),
+                ElevatedButton.icon(
+                  onPressed: _openMap,
+                  icon: const Icon(Icons.directions_outlined),
+                  label: const Text('فتح في الخريطة'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    foregroundColor: AppTheme.primaryColor,
+                    elevation: 0,
+                    side: const BorderSide(color: AppTheme.primaryColor),
+                    minimumSize: const Size(double.infinity, 50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
-        ],
-      ),
-    ).animate().fadeIn(delay: 400.ms);
+        ).animate().fadeIn(delay: 400.ms);
+      },
+    );
   }
 
   Widget _buildQRCodeSection() {

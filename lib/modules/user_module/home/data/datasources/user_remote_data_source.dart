@@ -14,15 +14,13 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     const String image1 = 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1000&auto=format&fit=crop';
     const String image2 = 'https://images.unsplash.com/photo-1543353071-873f17a7a088?q=80&w=1000&auto=format&fit=crop';
     const String image3 = 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=1000&auto=format&fit=crop';
-    const String logo = 'https://scontent.fcai20-5.fna.fbcdn.net/v/t39.30808-6/311596277_1586593778410637_675445795878871277_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=53a332&_nc_ohc=TKxV3KskkHYQ7kNvwGFNUjw&_nc_oc=AdplVsXmdU6jLwVW1AdgT3bYoiwek2Uhny9_j2t9JUri0StpxTd4NKmcZGAeMqt9yiQ&_nc_zt=23&_nc_ht=scontent.fcai20-5.fna&_nc_gid=BlcAzgEDj3U8WvRTOymhiA&_nc_ss=7b2a8&oh=00_Af6BGLZE7FGmDGe76dhIfHYNcLjB1sZhelecGUxBDQQluw&oe=69FFCED5';
+    const String logo = 'https://scontent.fcai20-5.fna.fbcdn.net/v/t39.30808-6/311596277_1586593778410637_675445795878871277_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=53a332&_nc_ohc=eE2N41RZXiYQ7kNvwFp2aFC&_nc_oc=AdpbvCHb45c9VoMIRQviPI7hcKZPoVk-eqzm1iw4dDS5mHvaKsnS5tjyodk2kryGBOU&_nc_zt=23&_nc_ht=scontent.fcai20-5.fna&_nc_gid=OwpYhw_2qo1JTdJaJgQ-qg&_nc_ss=7b2a8&oh=00_Af4HyvyLhcj08TPyYyNy7HtfPCxpzFSqPNx7HrqLRVGPHg&oe=6A066655';
 
     final mockStore = StoreModel(
       id: 'store_1',
       name: 'مطعم الثورة العاشر من رمضان',
       category: 'اكل',
       distance: 0.8,
-      deliveryTime: '٢٠-٣٠ دقيقة',
-      deliveryFee: 'ج.م ١٠',
       rating: '٤.٨',
       emoji: '🍛',
       primaryColor: const Color(0xFF6B4FD4),
@@ -75,13 +73,51 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
         discountedPrice: 50,
         store: mockStore,
       ),
+      OfferModel(
+        id: 'off_3',
+        title: 'عصير الفواكه الطازج',
+        subtitle: 'خصم ٢٠٪ على جميع العصائر',
+        description: 'استمتع بأفضل عصائر الفواكه الطازجة من مطعم الثورة. خصم ٢٠٪ على جميع العصائر، بما في ذلك عصير البرتقال، الليمون، والمانجو. العرض ساري لفترة محدودة.',
+        category: 'عصائر',
+        distance: 1.2,
+        discount: 'خصم ٢٠ %',
+        emoji: '🍹',
+        primaryColor: const Color(0xFF27AE60),
+        bgStart: const Color(0xFFE8F8F5),
+        bgEnd: const Color(0xFFD5F5E3),
+        imageUrl: image3,
+        images: [image3, image1, image2],
+        logoUrl: logo,
+        originalPrice: 50,
+        discountedPrice: 40,
+        store: mockStore,
+      ),
+      OfferModel(
+        id: 'off_4',
+        title: 'طبق الحلوى الشرقية',
+        subtitle: 'احصل على خصم ٣٠٪',
+        description: 'استمتع بأشهى الحلويات الشرقية من مطعم الثورة. خصم ٣٠٪ على جميع الحلويات، بما في ذلك البقلاوة، الكنافة، وأم علي. العرض ساري لفترة محدودة.',
+        category: 'حلويات',
+        distance: 1.2,
+        discount: 'خصم ٣٠ %',
+        emoji: '🍰',
+        primaryColor: const Color(0xFF8E44AD),
+        bgStart: const Color(0xFFF5EEF8),
+        bgEnd: const Color(0xFFE8DAEF),
+        imageUrl: image1,
+        images: [image1, image2, image3],
+        logoUrl: logo,
+        originalPrice: 80,
+        discountedPrice: 56,
+        store: mockStore,
+      ),
     ];
   }
 
   @override
   Future<List<StoreModel>> getStores() async {
     const String image = 'https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=1000&auto=format&fit=crop';
-    const String logo = 'https://scontent.fcai20-5.fna.fbcdn.net/v/t39.30808-6/311596277_1586593778410637_675445795878871277_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=53a332&_nc_ohc=TKxV3KskkHYQ7kNvwGFNUjw&_nc_oc=AdplVsXmdU6jLwVW1AdgT3bYoiwek2Uhny9_j2t9JUri0StpxTd4NKmcZGAeMqt9yiQ&_nc_zt=23&_nc_ht=scontent.fcai20-5.fna&_nc_gid=BlcAzgEDj3U8WvRTOymhiA&_nc_ss=7b2a8&oh=00_Af6BGLZE7FGmDGe76dhIfHYNcLjB1sZhelecGUxBDQQluw&oe=69FFCED5';
+    const String logo = 'https://scontent.fcai20-5.fna.fbcdn.net/v/t39.30808-6/311596277_1586593778410637_675445795878871277_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=53a332&_nc_ohc=eE2N41RZXiYQ7kNvwFp2aFC&_nc_oc=AdpbvCHb45c9VoMIRQviPI7hcKZPoVk-eqzm1iw4dDS5mHvaKsnS5tjyodk2kryGBOU&_nc_zt=23&_nc_ht=scontent.fcai20-5.fna&_nc_gid=OwpYhw_2qo1JTdJaJgQ-qg&_nc_ss=7b2a8&oh=00_Af4HyvyLhcj08TPyYyNy7HtfPCxpzFSqPNx7HrqLRVGPHg&oe=6A066655';
 
     // Simulate network delay
     await Future.delayed(const Duration(seconds: 1));
@@ -91,8 +127,6 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
         name: 'مطعم الثورة العاشر من رمضان',
         category: 'اكل',
         distance: 0.8,
-        deliveryTime: '٢٠-٣٠ دقيقة',
-        deliveryFee: 'ج.م ١٠',
         rating: '٤.٨',
         emoji: '🍛',
         primaryColor: const Color(0xFF6B4FD4),
@@ -108,8 +142,6 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
         name: 'كافيه الاندلس',
         category: 'كافيه',
         distance: 1.5,
-        deliveryTime: '١٠-٢٠ دقيقة',
-        deliveryFee: 'ج.م ٥',
         rating: '٤.٥',
         emoji: '☕',
         primaryColor: const Color(0xFFF27121),
@@ -119,6 +151,36 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
         address: 'العاشر من رمضان، الاردنية',
         latitude: 30.3012,
         longitude: 31.7385,
+      ),
+      StoreModel(
+        id: 'store_3',
+        name: 'محل الحلويات الشرقية',
+        category: 'حلويات',
+        distance: 2.0,
+        rating: '٤.٧',
+        emoji: '🍰',
+        primaryColor: const Color(0xFF8E44AD),
+        imageUrl: image,
+        logoUrl: logo,
+        offersCount: '٥',
+        address: 'العاشر من رمضان، المجاورة ٢١',
+        latitude: 30.2985,
+        longitude: 31.7420,
+      ),
+      StoreModel(
+        id: 'store_4',
+        name: 'مطعم البيت الشامي',
+        category: 'اكل',
+        distance: 2.5,
+        rating: '٤.٦',
+        emoji: '🍲',
+        primaryColor: const Color(0xFF27AE60),
+        imageUrl: image,
+        logoUrl: logo,
+        offersCount: '٤',
+        address: 'العاشر من رمضان، المجاورة ١٠',
+        latitude: 30.2950,
+        longitude: 31.7455,
       ),
     ];
   }

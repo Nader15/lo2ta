@@ -6,8 +6,6 @@ class Store extends Equatable {
   final String name;
   final String category;
   final double? distance; // Distance in km
-  final String deliveryTime;
-  final String deliveryFee;
   final String rating;
   final String emoji;
   final Color primaryColor;
@@ -23,8 +21,6 @@ class Store extends Equatable {
     required this.name,
     required this.category,
     this.distance,
-    required this.deliveryTime,
-    required this.deliveryFee,
     required this.rating,
     required this.emoji,
     required this.primaryColor,
@@ -42,8 +38,6 @@ class Store extends Equatable {
     name,
     category,
     distance,
-    deliveryTime,
-    deliveryFee,
     rating,
     emoji,
     primaryColor,

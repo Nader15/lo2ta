@@ -1,7 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lo2ta/core/theme/app_theme.dart';
 import 'package:lo2ta/core/utils/clip_directions.dart';
 import 'package:lo2ta/core/utils/slanted_clipper.dart';
 import 'package:lo2ta/modules/user_module/home/domain/entities/offer.dart';
+import 'package:lo2ta/modules/user_module/home/presentation/cubits/home_cubit.dart';
 import 'package:lo2ta/modules/user_module/home/presentation/widgets/store_logo_widget.dart';
 import 'package:lo2ta/modules/user_module/offers/presentation/pages/offer_details_page.dart';
 
@@ -76,14 +80,38 @@ class _HeroCardItem extends StatelessWidget {
     return InkWell(
       onTap: () => Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => OfferDetailsPage(offer: offer)),
+        MaterialPageRoute(
+          builder: (childContext) => BlocProvider.value(
+            value: context.read<HomeCubit>(),
+            child: OfferDetailsPage(offer: offer),
+          ),
+        ),
       ),
       child: ClipPath(
         clipper: SlantedClipper(direction: direction, radius: 40),
         child: Stack(
           children: [
             Positioned.fill(
-              child: Image.network(offer.imageUrl, fit: BoxFit.fill),
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      AppTheme.accentColor,
+                      AppTheme.accentColor.withValues(alpha: 0.7),
+                    ],
+                  ),
+                ),
+                child: CachedNetworkImage(
+                  imageUrl: offer.imageUrl,
+                  fit: BoxFit.cover,
+                  errorWidget: (context, url, error) => Container(
+                    color: Colors.grey.shade300,
+                    child: const Icon(Icons.error, color: Colors.red),
+                  ),
+                ),
+              ),
             ),
             Positioned(
               right: 20,
@@ -154,6 +182,7 @@ class _HeroCardItem extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           '${offer.discountedPrice.toInt()} جنية ',
@@ -161,7 +190,6 @@ class _HeroCardItem extends StatelessWidget {
                             context,
                           ).textTheme.labelLarge?.copyWith(color: Colors.white),
                         ),
-                        const SizedBox(width: 10),
                         Text(
                           '${offer.originalPrice.toInt()} جنية ',
                           style: Theme.of(context).textTheme.bodySmall
@@ -169,25 +197,6 @@ class _HeroCardItem extends StatelessWidget {
                                 color: Colors.white.withValues(alpha: 0.6),
                                 decoration: TextDecoration.lineThrough,
                               ),
-                        ),
-                        const Spacer(),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 10,
-                            vertical: 4,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.greenAccent.withValues(alpha: 0.2),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: Text(
-                            offer.discount,
-                            style: Theme.of(context).textTheme.bodySmall
-                                ?.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                          ),
                         ),
                       ],
                     ),

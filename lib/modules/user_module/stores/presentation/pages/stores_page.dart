@@ -100,13 +100,17 @@ class _StoresListPageState extends State<StoresListPage> {
                                     physics: const BouncingScrollPhysics(),
                                     itemCount: filteredStores.length,
                                     itemBuilder: (context, index) {
+                                      final store = filteredStores[index];
+                                      final storeOffers = state.offers
+                                          .where((o) => o.store?.id == store.id)
+                                          .toList();
                                       return StoreCardWidget(
-                                        store: filteredStores[index],
+                                        store: store,
+                                        storeOffers: storeOffers,
                                       );
                                     },
                                   ),
                           ),
-
                         ],
                       );
                     } else if (state is UserHomeError) {

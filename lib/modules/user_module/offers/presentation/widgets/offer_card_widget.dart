@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lo2ta/modules/user_module/home/domain/entities/offer.dart';
+import 'package:lo2ta/modules/user_module/home/presentation/cubits/home_cubit.dart';
 import 'package:lo2ta/modules/user_module/offers/presentation/pages/offer_details_page.dart';
 
 class OfferCardWidget extends StatelessWidget {
@@ -16,7 +18,10 @@ class OfferCardWidget extends StatelessWidget {
       onTap: () => Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => OfferDetailsPage(offer: offer),
+          builder: (childContext) => BlocProvider.value(
+            value: context.read<HomeCubit>(),
+            child: OfferDetailsPage(offer: offer),
+          ),
         ),
       ),
       child: Container(
@@ -94,71 +99,97 @@ class OfferCardWidget extends StatelessWidget {
                   padding: const EdgeInsets.all(16.0),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
-                       crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            offer.subtitle,
-                            style: Theme.of(context).textTheme.titleMedium
-                                ?.copyWith(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w800,
+
+                      /// LEFT SIDE
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+
+                            /// SUBTITLE
+                            Text(
+                              offer.subtitle,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium
+                                  ?.copyWith(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w800,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                             ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          SizedBox(height: 8),
-                          Text(
-                            offer.title,
-                            style: Theme.of(context).textTheme.bodyMedium
-                                ?.copyWith(
-                              color: offer.primaryColor,
+
+                            const SizedBox(height: 8),
+
+                            /// TITLE
+                            Text(
+                              offer.title,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.copyWith(
+                                color: offer.primaryColor,
+                              ),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
                             ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
+
                       const SizedBox(width: 12),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 8,
-                              vertical: 4,
+
+                      /// PRICE BOX
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 8,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.greenAccent.withValues(alpha: 0.3),
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+
+                            /// DISCOUNTED PRICE
+                            Text(
+                              '${offer.discountedPrice.toInt()} جنية',
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelLarge
+                                  ?.copyWith(
+                                color: Colors.green,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                            decoration: BoxDecoration(
-                              color: Colors.greenAccent.withValues(alpha: 0.3),
-                              borderRadius: BorderRadius.circular(16),
+
+                            const SizedBox(height: 4),
+
+                            /// ORIGINAL PRICE
+                            Text(
+                              '${offer.originalPrice.toInt()} جنية',
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall
+                                  ?.copyWith(
+                                color: Colors.black.withValues(alpha: 0.6),
+                                decoration:
+                                TextDecoration.lineThrough,
+                              ),
                             ),
-                            child: Column(
-                              children: [
-                                Text(
-                                  '${offer.discountedPrice.toInt()} جنية ',
-                                  style: Theme.of(context).textTheme.labelLarge
-                                      ?.copyWith(color: Colors.green),
-                                ),
-                                const SizedBox(height: 4),
-                                Text(
-                                  '${offer.originalPrice.toInt()} جنية',
-                                  style: Theme.of(context).textTheme.bodySmall
-                                      ?.copyWith(
-                                    color: Colors.black.withValues(alpha: 0.6),
-                                    decoration: TextDecoration.lineThrough,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ],
                   ),
-                ),
+                )
               ],
             ),
           ),
