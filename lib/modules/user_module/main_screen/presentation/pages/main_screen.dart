@@ -164,12 +164,12 @@ class _AppBottomNavbarState extends State<_AppBottomNavbar>
               color: Colors.white.withValues(alpha: 0.88),
               borderRadius: BorderRadius.circular(32),
               border: Border.all(
-                color: AppTheme.primaryColor.withValues(alpha: 0.13),
+                color: AppTheme.accentColor.withValues(alpha: 0.13),
                 width: 1.5,
               ),
               boxShadow: [
                 BoxShadow(
-                  color: AppTheme.primaryColor.withValues(alpha: 0.13),
+                  color: AppTheme.accentColor.withValues(alpha: 0.13),
                   blurRadius: 24,
                   offset: const Offset(0, 8),
                 ),
@@ -243,8 +243,8 @@ class _NavButton extends StatelessWidget {
                     ? BoxDecoration(
                         gradient: LinearGradient(
                           colors: [
-                            AppTheme.primaryColor,
-                            AppTheme.primaryColor.withValues(alpha: 0.75),
+                            AppTheme.accentColor,
+                            AppTheme.accentColor.withValues(alpha: 0.75),
                           ],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
@@ -252,7 +252,7 @@ class _NavButton extends StatelessWidget {
                         borderRadius: BorderRadius.circular(14),
                         boxShadow: [
                           BoxShadow(
-                            color: AppTheme.primaryColor.withValues(alpha: 0.35),
+                            color: AppTheme.accentColor.withValues(alpha: 0.35),
                             blurRadius: 10,
                             offset: const Offset(0, 4),
                           ),
@@ -281,7 +281,7 @@ class _NavButton extends StatelessWidget {
                 duration: const Duration(milliseconds: 250),
                 style: Theme.of(context).textTheme.bodySmall!.copyWith(
                   color: isActive
-                      ? AppTheme.primaryColor
+                      ? AppTheme.accentColor
                       : const Color(0xFFAAAAAA),
                   fontWeight: FontWeight.w600,
                 ),

@@ -4,7 +4,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:lo2ta/core/theme/app_theme.dart';
 import 'package:lo2ta/modules/auth_module/domain/entities/user_entity.dart';
 import 'package:lo2ta/modules/auth_module/presentation/cubits/auth_cubit.dart';
-import 'package:lo2ta/modules/auth_module/presentation/pages/onboarding_page.dart';
+import 'package:lo2ta/modules/auth_module/presentation/pages/login_page.dart';
 import 'package:lo2ta/modules/store_module/dashboard/presentation/pages/main_wrapper.dart';
 import 'package:lo2ta/modules/user_module/main_screen/presentation/pages/main_screen.dart';
 
@@ -32,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
           );
         } else if (state is Unauthenticated || state is AuthError) {
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const OnboardingPage()));
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const LoginPage()));
         }
       },
       child: Scaffold(
