@@ -43,16 +43,14 @@ class UserHomePage extends StatelessWidget {
                               title: 'عروض لقطة متاحة حالياً',
                               badge: '🔥 كميات محدودة',
                               highlightWord: 'لقطة',
-                              onTap: () {},
                             ),
                             const SizedBox(height: 16),
                             OffersWidget(offers: state.offers),
-                            const SizedBox(height: 32),
+                            const SizedBox(height: 16),
                             SectionTitle(
                               title: 'أماكن فيها عروض لقطة',
                               badge: '⭐ أشهر الأماكن',
                               highlightWord: 'لقطة',
-                              onTap: () {},
                             ),
                             const SizedBox(height: 16),
                             StoresWidget(

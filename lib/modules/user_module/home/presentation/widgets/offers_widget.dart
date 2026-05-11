@@ -41,30 +41,99 @@ class _OffersWidgetState extends State<OffersWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.sizeOf(context).height / 2.2,
-      child: PageView.builder(
-        controller: _controller,
-        physics: const BouncingScrollPhysics(),
-        itemCount: widget.offers.length,
-        itemBuilder: (context, index) {
-          final offer = widget.offers[index];
-          final diff = (_page - index).abs();
-          final scale = (1 - diff * 0.15).clamp(0.85, 1.0);
+    return Column(
+      children: [
+        SizedBox(
+          height: MediaQuery.sizeOf(context).height / 1.8,
+          child: PageView.builder(
+            controller: _controller,
+            physics: const BouncingScrollPhysics(),
+            itemCount: widget.offers.length,
+            itemBuilder: (context, index) {
+              final offer = widget.offers[index];
+              final diff = (_page - index).abs();
+              final scale = (1 - diff * 0.15).clamp(0.85, 1.0);
 
-          return Center(
-            child: Transform.scale(
-              scale: scale,
-              child: _HeroCardItem(
-                offer: offer,
-                direction: index.isEven
-                    ? ClipDirection.left
-                    : ClipDirection.right,
+              return Center(
+                child: Transform.scale(
+                  scale: scale,
+                  child: _HeroCardItem(
+                    offer: offer,
+                    direction: index.isEven
+                        ? ClipDirection.left
+                        : ClipDirection.right,
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+        /// Indicators like 1 of 10
+        const SizedBox(height: 24),
+
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 28),
+          child: Column(
+            children: [
+              /// Top Row
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  /// Progress Line
+                  Expanded(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(50),
+                      child: LayoutBuilder(
+                        builder: (context, constraints) {
+                          final progress =
+                          ((_page + 1) / widget.offers.length).clamp(0.0, 1.0);
+
+                          return Stack(
+                            children: [
+                              Container(
+                                height: 6,
+                                width: double.infinity,
+                                color: Colors.grey.withValues(alpha: 0.15),
+                              ),
+
+                              AnimatedContainer(
+                                duration: const Duration(milliseconds: 250),
+                                curve: Curves.easeOut,
+                                height: 6,
+                                width: constraints.maxWidth * progress,
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      AppTheme.accentColor,
+                                      AppTheme.accentColor.withValues(alpha: 0.6),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 12),
+                  AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 250),
+                    child: Text(
+                      '${(_page.round() + 1).clamp(1, widget.offers.length)} / ${widget.offers.length}',
+                      key: ValueKey(_page.round()),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: AppTheme.accentColor,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ),
-          );
-        },
-      ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

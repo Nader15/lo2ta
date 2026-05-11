@@ -46,7 +46,7 @@ class SectionTitle extends StatelessWidget {
                         horizontal: 8, vertical: 2),
                     margin: const EdgeInsets.only(bottom: 6),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF6B4FD4).withOpacity(0.1),
+                      color: const Color(0xFF6B4FD4).withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Text(
@@ -99,7 +99,7 @@ class SectionTitle extends StatelessWidget {
               child: InkWell(
                 onTap: onTap,
                 borderRadius: BorderRadius.circular(8),
-                splashColor: const Color(0xFF6B4FD4).withOpacity(0.08),
+                splashColor: const Color(0xFF6B4FD4).withValues(alpha: 0.08),
                 highlightColor: Colors.transparent,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
@@ -144,7 +144,7 @@ class SectionTitle extends StatelessWidget {
     if (highlightWord == null || !title.contains(highlightWord!)) {
       return Text(
         title,
-        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+        style: Theme.of(context).textTheme.titleMedium?.copyWith(
               fontSize: 22,
               fontWeight: FontWeight.w900,
               color: const Color(0xFF0A0A18),
@@ -157,8 +157,8 @@ class SectionTitle extends StatelessWidget {
     final parts = title.split(highlightWord!);
     return RichText(
       text: TextSpan(
-        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-              fontSize: 22,
+        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              // fontSize: 22,
               fontWeight: FontWeight.w900,
               color: const Color(0xFF0A0A18),
               height: 1.2,
